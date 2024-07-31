@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/eixo', 'App\Http\Controllers\EixoController@index');
+
+Route::get('/eixo/create', 'App\Http\Controllers\EixoController@create');
+Route::post('/eixo', 'App\Http\Controllers\EixoController@store')->name('eixo.store');

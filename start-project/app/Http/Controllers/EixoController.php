@@ -45,7 +45,7 @@ class EixoController extends Controller
 
     public function edit($id)
     {
-        $eixo = Eixo:: find(sid);
+        $eixo = Eixo:: find($id);
 
         if(isset($eixo))
         {
@@ -65,7 +65,7 @@ class EixoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $eixo = Eixo:: find(sid);
+        $eixo = Eixo:: find($id);
 
         if(isset($eixo))
         {

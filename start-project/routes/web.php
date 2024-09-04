@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+*/Route::resource('/curso', 'App\Http\Controllers\CursoController');
 
 Route::get('/', function () {
     return view('home');
@@ -22,3 +22,5 @@ Route::get('/', function () {
 //Route::post('/eixo', 'App\Http\Controllers\EixoController@store')->name('eixo.store');
 Route::resource('/eixo', 'App\Http\Controllers\EixoController');
 Route::resource('/curso', 'App\Http\Controllers\CursoController');
+Route::get('/report/eixos/{eixo_id}', 'App\Http\Controllers\EixoController@report')->name('eixo.report');
+Route::get('/graph/eixos', 'App\Http\Controllers\EixoController@graph')->name('eixo.graph');

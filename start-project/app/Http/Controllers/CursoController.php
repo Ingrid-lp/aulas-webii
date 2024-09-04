@@ -39,15 +39,16 @@ class CursoController extends Controller
         return "<h1>Eixo não encontrado!!!</h1>";
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $curso = Curso::find($id);
+
+        if(isset($curso))
+        {
+            return view('curso.show', compact('curso'));
+        }
+
+        return "<h1>Curso não encontrado!!!</h1>";
     }
 
     function edit($id)
@@ -79,14 +80,16 @@ class CursoController extends Controller
         return "<h1>Eixo não encontrado!!!</h1>";
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $curso = Curso::find($id);
+
+        if(isset($curso))
+        {
+            $curso->delete();
+            return redirect()->route('curso.index');
+        }
+
+        return "<h1>Curso não encontrado!!!</h1>";
     }
 }

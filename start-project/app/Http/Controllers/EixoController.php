@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Eixo;
+use App\Models\Curso;
+use Dompdf\Dompdf;
 
 class EixoController extends Controller
 {
@@ -56,33 +58,22 @@ class EixoController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        $eixo = Eixo:: find($id);
+        $eixo = Eixo::find($id);
 
         if(isset($eixo))
         {
-            $eixo -> name = $requerest -> name;
-            $eixo -> description = $requerest -> description; 
-            $eixo -> save();
+            $eixo->name = $request -> nome;
+            $eixo->description = $request -> descricao; 
+            $eixo->save();
 
-            return redirect() -> route('eixo.index');
+            return redirect()->route('eixo.index');
         }
+
+        return "<h1>Eixo não encontrado!!!</h1>";
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $eixo = Eixo:: find($id);
@@ -94,6 +85,22 @@ class EixoController extends Controller
             return redirect() -> route('eixo.index');
         }
 
-        return '<h1>EIXO NÂO ENCONTRADO</h1>';
+        return '<h1>EIXO NÃO ENCONTRADO</h1>';
+    }
+
+    public function report($id)
+    {
+        $cursos = Curso::where('eixo_id', $id)->get();
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml(view('eixo.report', compact('cursos')));
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream("relatorio-horas-turma.pdf", array("Attachment" => false));
+    }
+
+    public function graph()
+    {
+        
     }
 }

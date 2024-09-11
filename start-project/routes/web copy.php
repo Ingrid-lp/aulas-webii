@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+*/Route::resource('/curso', 'App\Http\Controllers\CursoController');
 
 Route::get('/', function () {
     return view('home');
-})->middleware(['auth'])->name('home');
+})->name('home');
 
 //Route::get('/eixo', 'App\Http\Controllers\EixoController@index')->name('eixo.index');
 //Route::get('/eixo/create', 'App\Http\Controllers\EixoController@create')->name('eixo.create');
@@ -24,9 +24,3 @@ Route::resource('/eixo', 'App\Http\Controllers\EixoController');
 Route::resource('/curso', 'App\Http\Controllers\CursoController');
 Route::get('/report/eixos/{eixo_id}', 'App\Http\Controllers\EixoController@report')->name('eixo.report');
 Route::get('/graph/eixos', 'App\Http\Controllers\EixoController@graph')->name('eixo.graph');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';

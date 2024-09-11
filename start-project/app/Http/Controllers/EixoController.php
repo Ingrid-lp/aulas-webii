@@ -10,6 +10,20 @@ use Dompdf\Dompdf;
 class EixoController extends Controller
 {
 
+    private $regras = 
+    [
+        'name' => 'required|max:20|min:3|unique:eixos',
+        'description' => 'required|max:300|min:10'
+    ];
+
+    private $msgs = 
+    [
+        "required" => "O preenchimento do campo [:attribute] é obrigatório!",
+        "max" => "O campo [:attribute] possui tamanho máximo de [:max] caracteres!",
+        "min" => "O campo [:attribute] possui tamanho mínimo de [:min] caracteres!",
+        "unique" => "Já existe um endereço cadastrado com esse [:attribute]!"
+    ];    
+
     public function index()
     {
         $data = Eixo::with('curso')->get();
@@ -25,6 +39,8 @@ class EixoController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate($this->regras, $this->msgs);
+
         $eixo = new Eixo();
         $eixo->name = $request->name;
         $eixo->description = $request->description;
@@ -101,6 +117,26 @@ class EixoController extends Controller
 
     public function graph()
     {
-        
+        $eixos = Eixo::with('curso')->orderBy('name')->get();
+
+
+        $data = [
+            ["EIXO", "NÚMERO DE CURSOS"]
+        ];
+
+        $cont = 1;
+        foreach ($eixos as $item) 
+        {
+            $data[$cont] = [
+                $item->name, count($item->curso)
+            ];
+
+            $cont++;
+        }
+
+        //dd($data);
+        $data = json_encode($data);
+
+        return view('eixo.graph', compact(['data']));
     }
 }

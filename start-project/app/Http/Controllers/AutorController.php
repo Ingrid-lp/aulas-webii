@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Autor;
 use App\Models\Livro;
+use App\Models\Editora;
+use App\Models\Genero;
 use Dompdf\Dompdf;
 
 class AutorController extends Controller
@@ -12,7 +14,7 @@ class AutorController extends Controller
 
     private $regras = 
     [
-        'name' => 'required|max:50|min:3|unique:autors',
+        'name' => 'required|max:100|min:3|unique:autors',
     ];
 
     private $msgs = 
@@ -37,6 +39,7 @@ class AutorController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate($this->regras,$this->msgs);
         $autor = new Autor();
         $autor->name = $request->name;
         $autor->save();
@@ -74,7 +77,7 @@ class AutorController extends Controller
 
         if(isset($autor))
         {
-            $autor->name = $request -> nome;
+            $autor->name = $request -> name;
             $autor->save();
 
             return redirect()->route('autor.index');
@@ -100,6 +103,8 @@ class AutorController extends Controller
     public function report($id)
     {
         $livros = Livro::where('autor_id', $id)->get();
+        //$editoras = Editora::where('autor_id', $id)->get();
+        //$generos = Genero::where('autor_id', $id)->get();
 
         $dompdf = new Dompdf();
         $dompdf->loadHtml(view('autor.report', compact('livros')));
@@ -111,6 +116,8 @@ class AutorController extends Controller
     public function graph()
     {
         $autors = Autor::with('livro')->orderBy('name')->get();
+        //$editoras = Editora::with('livro')->orderBy('nome')->get();
+        //$generos = Genero::with('livro')->orderBy('nome')->get();
 
 
         $data = [
@@ -126,6 +133,7 @@ class AutorController extends Controller
 
             $cont++;
         }
+
 
         //dd($data);
         $data = json_encode($data);

@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::resource('/autor', 'App\Http\Controllers\AutorController');
 Route::resource('/livro', 'App\Http\Controllers\LivroController');
 Route::resource('/editora', 'App\Http\Controllers\EditoraController');
+Route::resource('/genero', 'App\Http\Controllers\GeneroController');
 Route::get('/report/autors/{autor_id}', 'App\Http\Controllers\AutorController@report')->name('autor.report');
 Route::get('/graph/autors', 'App\Http\Controllers\AutorController@graph')->name('autor.graph');
 

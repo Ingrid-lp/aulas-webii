@@ -5,9 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Livro;
 use App\Models\Editora;
+use App\Models\Autor;
 
 class EditoraController extends Controller
 {
+    private $regras = 
+    [
+        'nome' => 'required|max:100|min:3|unique:editoras',
+    ];
+
+    private $msgs = 
+    [
+        "required" => "O preenchimento do campo [:attribute] é obrigatório!",
+        "max" => "O campo [:attribute] possui tamanho máximo de [:max] caracteres!",
+        "min" => "O campo [:attribute] possui tamanho mínimo de [:min] caracteres!",
+        "unique" => "Já existe um endereço cadastrado com esse [:attribute]!"
+    ];    
 
     public function index()
     {
@@ -22,6 +35,7 @@ class EditoraController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate($this->regras,$this->msgs);
         $editora = new Editora();
         $editora->nome = $request->nome;
         $editora->save();
@@ -71,7 +85,6 @@ class EditoraController extends Controller
     public function destroy($id)
     {
         $editora = Editora:: find($id);
-        $editora->nome = $request->nome;
 
         if(isset($editora))
         {

@@ -8,14 +8,39 @@
     <label class="mt-3">Nome</label>
     <input type="text" name="nome" class="form-control" value="{{$livro->nome}}"/> 
     <label class="mt-3">Pais</label>
-    <input type="text" name="pais" class="form-control" value="{{$livro->abreviatura}}"/>
+    <input type="text" name="pais" class="form-control" value="{{$livro->pais}}"/>
     <label class="mt-3">Autor</label>
     <select name="autor" class="form-control">
+    
         @foreach ($autors as $item)
-          @if($item->id == $livro->eixo_id)  
+          @if($item->id == $livro->id)  
             <option value="{{$item->id}}" selected>{{ $item->name }}</option>
            @else 
             <option value="{{$item->id}}">{{ $item->name }}</option>
+           @endif 
+        @endforeach
+    </select>
+
+    <label class="mt-3">Editora</label>
+    <select name="editora" class="form-control">
+
+        @foreach ($editoras as $item)
+            @if($item->id == $livro->id)  
+            <option value="{{$item->id}}" selected>{{ $item->nome }}</option>
+           @else 
+            <option value="{{$item->id}}">{{ $item->nome }}</option>
+           @endif 
+        @endforeach 
+    </select>
+    
+        <label class="mt-3">Genero</label>
+    <select name="genero" class="form-control">
+
+        @foreach ($generos as $item)
+            @if($item->id == $livro->id)  
+            <option value="{{$item->id}}" selected>{{ $item->nome }}</option>
+           @else 
+            <option value="{{$item->id}}">{{ $item->nome }}</option>
            @endif 
         @endforeach
     </select>

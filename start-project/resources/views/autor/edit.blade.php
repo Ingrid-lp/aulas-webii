@@ -6,7 +6,7 @@
     @csrf
     @method('PUT')
     <label class="mt-3">Nome</label>
-    <input type="text" name="nome" class="form-control" value="{{$autor->nome}}"/> 
+    <input type="text" name="name" class="form-control" value="{{$autor->name}}"/> 
 
     <a href="{{route('autor.index')}}" class="btn btn-secondary mt-2">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">

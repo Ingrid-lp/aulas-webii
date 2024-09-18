@@ -39,6 +39,7 @@
             },
         };
 
+
         // DESENHA GRÁFICO DE BARRAS
         chart = new google.visualization.BarChart(document.getElementById('barra'));
         chart.draw(data, options);  
@@ -54,6 +55,7 @@
         // DESENHA GRÁFICO DE PIZZA
             chart = new google.visualization.PieChart(document.getElementById('pizza'));
             chart.draw(data, options);
+   
 
         // ================================================= //
         // GRÁFICO DE COLUNA

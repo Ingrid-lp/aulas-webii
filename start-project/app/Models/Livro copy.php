@@ -15,15 +15,5 @@ class Livro extends Model
     {
         return $this->belongsTo('App\Models\Autor');
     }
-
-    public function Editora()
-    {
-        return $this->belongsTo('App\Models\Editora');
-    }
-
-    public function Genero()
-    {
-        return $this->belongsTo('App\Models\Genero');
-    }
 }
 

@@ -11,7 +11,10 @@
     @foreach($livros as $item)
         <h1>{{$item->nome}}</h1>
         <h4>{{$item->pais}}</h4>
+        <h4>{{$item->editora->nome}}</h4>
+        <h4>{{$item->genero->nome}}</h4>
         <hr>
     @endforeach
+
 </body>
 </html>        

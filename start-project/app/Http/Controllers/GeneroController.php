@@ -3,9 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Livro;
+use App\Models\Genero;
+use App\Models\Autor;
 
 class GeneroController extends Controller
 {
+    private $regras = 
+    [
+        'nome' => 'required|max:100|min:3|unique:generos',
+    ];
+
+    private $msgs = 
+    [
+        "required" => "O preenchimento do campo [:attribute] é obrigatório!",
+        "max" => "O campo [:attribute] possui tamanho máximo de [:max] caracteres!",
+        "min" => "O campo [:attribute] possui tamanho mínimo de [:min] caracteres!",
+        "unique" => "Já existe um endereço cadastrado com esse [:attribute]!"
+    ];    
   
     public function index()
     {
@@ -21,8 +36,9 @@ class GeneroController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate($this->regras,$this->msgs);
         $genero = new Genero();
-        $genero->name = $request->name;
+        $genero->nome = $request->nome;
         $genero->save();
 
         return redirect()->route('genero.index');
@@ -54,17 +70,17 @@ class GeneroController extends Controller
 
     public function update(Request $request, $id)
     {
-        $editora = Editora::find($id);
+        $genero = Genero::find($id);
 
-        if(isset($editora))
+        if(isset($genero))
         {
-            $editora->nome = $request -> nome;
-            $editora->save();
+            $genero->nome = $request -> nome;
+            $genero->save();
 
-            return redirect()->route('editora.index');
+            return redirect()->route('genero.index');
         }
 
-        return "<h1>Autor não encontrado!!!</h1>";
+        return "<h1>Genero não encontrado!!!</h1>";
     }
 
     public function destroy($id)

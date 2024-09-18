@@ -25,11 +25,11 @@
         // GRÁFICO DE BARRAS
         // Opções de Configuração
         options = {
-            title: 'TOTAL DE CURSOS / EIXO',
+            title: 'TOTAL DE LIVROS / AUTOR',
             colors: ['#198754'],
             legend: 'none',
             hAxis: {
-              title: 'Número de Cursos',
+              title: 'Número de Livros',
               titleTextStyle: {
                 fontSize: 12,
                 bold: true,
@@ -47,7 +47,7 @@
         // GRÁFICO DE PIZZA
         // Opções de Configuração
             options = {
-                title: 'PERCENTUAL DE CURSOS / EIXO ',
+                title: 'PERCENTUAL DE LIVROS / AUTOR ',
                 is3D: true
             };
 
@@ -59,13 +59,13 @@
         // GRÁFICO DE COLUNA
         // Opções de Configuração
         options = {
-            title: 'TOTAL DE CURSOS / EIXO',
+            title: 'TOTAL DE LIVROS / AUTOR',
             colors: ['#198754'],
             legend: 'none',
             hAxis: {
             },
             vAxis: {
-                title: 'Número de Cursos',
+                title: 'Número de Livros',
                 titleTextStyle: {
                     fontSize: 12,
                     bold: true,
@@ -81,7 +81,7 @@
         // GRÁFICO DE LINHA
         // Opções de Configuração
         options = {
-            title: 'TOTAL DE CURSOS / EIXO',
+            title: 'TOTAL DE LIVROS / AUTOR',
             colors: ['#198754'],
             curveType: 'function',
             legend: { position: 'bottom' }

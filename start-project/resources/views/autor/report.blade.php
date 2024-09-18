@@ -8,10 +8,9 @@
     <title>Document</title>
 </head>
 <body>
-    @foreach($cursos as $item)
+    @foreach($livros as $item)
         <h1>{{$item->nome}}</h1>
-        <h4>{{$item->abreviatura}}</h4>
-        <h4>{{$item->duracao}} ano(s)</h4>
+        <h4>{{$item->pais}}</h4>
         <hr>
     @endforeach
 </body>

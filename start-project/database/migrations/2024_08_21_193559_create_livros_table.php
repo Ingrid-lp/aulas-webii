@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEixosTable extends Migration
+class CreateLivrosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateEixosTable extends Migration
      */
     public function up()
     {
-        Schema::create('eixos', function (Blueprint $table) {
+        Schema::create('livros', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->text('description');
+            $table->string('nome',100)->unique();
+            $table->string('pais',8);
+            $table->unsignedBigInteger('autor_id');
+            $table->foreign('autor_id')->references('id')->on('autors');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +31,6 @@ class CreateEixosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('eixos');
+        Schema::dropIfExists('livros');
     }
 }

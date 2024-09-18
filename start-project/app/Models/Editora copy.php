@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Curso extends Model
+class Editora extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    public function Eixo()
+    public function Livro()
     {
-        return $this->belongsTo('App\Models\Eixo');
+        return $this->belongsTo('App\Models\Livro');
     }
 }
 
